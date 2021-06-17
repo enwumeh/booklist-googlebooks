@@ -44,16 +44,22 @@ const getBooks = async () => {
       const books = response.data.items
 
       books.map((book, idx) => {
-        console.log(idx + 1, book.volumeInfo.title);
-        console.log(book.volumeInfo.authors);
-        console.log(book.volumeInfo.publisher);
-       
+        console.log(idx + 1);
+        console.log("Title:", book.volumeInfo.title)
+        console.log("Author: "+ book.volumeInfo.authors);
+        console.log("Published by: "+book.volumeInfo.publisher);
+        console.log("                ")
+        console.log("                ")
       })
-
-      // console.log(books)
-
       
-      // return books;
+      prompt.get(['bookNumber'], async function () {
+
+        let bookNumber = res.bookNumber;
+
+
+
+
+      })
     })
   } catch (err) {
     console.log(err);
