@@ -3,11 +3,24 @@
 #search and save your book list, CLI application using google books api
 
 
-#to run program 
+## to run the program:
 
-navigate into main file
+navigate into main file:
 
+```
 cd src
 
-#to run program: 
+```
+
+# install dependcies locally: 
+```
+npm i, or npm install
+
+```
+
+
+# run program: 
+```
 node index.js
+
+```
