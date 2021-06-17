@@ -1,6 +1,15 @@
 # booklist-googlebooks
 
-#search and save your book list, CLI application using google books api
+a CLI application using the Google Books API
+search for books  and save your book list!
+
+## Here is a desscription of the program:
+
+1. Type in a query and display a set of 5 books which match the query, including the author, title and publishing company
+2. Select one entry from the 5 books and save it to a reading list
+3. View entries within the reading list
+
+
 
 
 ## to run the program:
