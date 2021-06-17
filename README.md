@@ -12,14 +12,14 @@ cd src
 
 ```
 
-# install dependcies locally: 
+## install dependcies locally: 
 ```
-npm i, or npm install
+npm i or npm install
 
 ```
 
 
-# run program: 
+## run program: 
 ```
 node index.js
 
