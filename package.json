@@ -1,0 +1,23 @@
+{
+  "name": "booklist-googlebooks",
+  "version": "1.0.0",
+  "description": "search and save your book list, CLI application using google books api",
+  "main": "index.js",
+  "dependencies": {
+    "prompt": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/enwumeh/booklist-googlebooks.git"
+  },
+  "author": "Emmanuela Nwumeh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/enwumeh/booklist-googlebooks/issues"
+  },
+  "homepage": "https://github.com/enwumeh/booklist-googlebooks#readme"
+}
