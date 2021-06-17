@@ -3,14 +3,15 @@ const axios = require('axios');
 
 
 prompt.start();
-console.log('Welcome! What would you like to search for? Options are "find book and" "see list"')
+console.log('Welcome! What would you like to search for? Options are "books" and  "see list"')
 
 prompt.get(['option'], function (err, res) {
-  if (res.option == 'find book') {
+  if (res.option == 'books') {
     getBooks()
     //handle condition
   }
   else if (res.option == 'see list') {
+    viewBookList()
     //handle condition
   }
   else if (err) {
@@ -20,7 +21,6 @@ prompt.get(['option'], function (err, res) {
 })
 
 const getBooks = async () => {
-
   try {
 
     prompt.get(['findBooks'], async function (err, res) {
@@ -51,18 +51,36 @@ const getBooks = async () => {
         console.log("                ")
         console.log("                ")
       })
-      
-      prompt.get(['bookNumber'], async function () {
+
+      console.log("select the book you want to save to your reading list (1-5)");
+      prompt.get(['bookNumber'], async function (err, res) {
 
         let bookNumber = res.bookNumber;
-        console.log("select the book you wanto save to the reading list")
+        let booklist = []
+        if (bookNumber <= 5) {
+          let UserSelected = books[bookNumber];
+          booklist.push(UserSelected);
+          // console.log("book!!!",books)
+          console.log("Your book of choice is:" + UserSelected);
+
+        }
       })
     })
   } catch (err) {
     console.log(err);
-    }
-    
+    } 
   // console.log("resp:", books);
-  
-  
+}
+
+const viewBookList = () => {
+  if (booklist.length <= 0) {
+    console.log("Looks like there are no books in your reading list")
+    getBooks()
+  }
+  else {
+    booklist.map((entry, idx) => {
+      console.log(idx+1, "Title: " + entry.title)
+    })
+  }
+
 }
