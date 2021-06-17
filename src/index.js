@@ -7,6 +7,7 @@ console.log('Welcome! What would you like to search for?')
 
 prompt.get(['option'], function (err, res) {
   if (res.option == 'find book') {
+    getBooks()
     //handle condition
   }
   else if (res.option == 'see list') {
@@ -18,23 +19,29 @@ prompt.get(['option'], function (err, res) {
   }
 })
 
+const getBooks = async () => {
 
-try {
-  const response = await axios.get(
-    "https://www.googleapis.com/books/v1/volumes?",
-    {
-      params: {
-        key: key,
-        q: bookQuery,
-        maxResults: 5,
-        fields: fields
-        // orderBy: Relevance
-      },
-    }
-  );
-  const books = response.data.items
-console.lolg(books)
-// console.log("resp:", books);
-} catch (err) {
-console.log(err);
+  try {
+    const key = "AIzaSyDmYQmWIoPydQv0NzmBQTRS5G_w0wdNAis";
+    let fields = 'items(id, volumeInfo(title,authors,publisher))'
+
+    const response = await axios.get(
+      "https://www.googleapis.com/books/v1/volumes?",
+      {
+        params: {
+          key: key,
+          q: "re",
+          maxResults: 5,
+          fields: fields
+          // orderBy: Relevance
+        },
+      }
+    );
+    const books = response.data.items
+  console.log(books)
+  // console.log("resp:", books);
+  } catch (err) {
+  console.log(err);
+  }
+  
 }
