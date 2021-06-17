@@ -3,7 +3,7 @@ const axios = require('axios');
 
 
 prompt.start();
-console.log('Welcome! What would you like to search for?')
+console.log('Welcome! What would you like to search for? Options are "find book and" "see list"')
 
 prompt.get(['option'], function (err, res) {
   if (res.option == 'find book') {
@@ -22,26 +22,44 @@ prompt.get(['option'], function (err, res) {
 const getBooks = async () => {
 
   try {
-    const key = "AIzaSyDmYQmWIoPydQv0NzmBQTRS5G_w0wdNAis";
-    let fields = 'items(id, volumeInfo(title,authors,publisher))'
 
-    const response = await axios.get(
-      "https://www.googleapis.com/books/v1/volumes?",
-      {
-        params: {
-          key: key,
-          q: "re",
-          maxResults: 5,
-          fields: fields
-          // orderBy: Relevance
-        },
-      }
-    );
-    const books = response.data.items
-  console.log(books)
-  // console.log("resp:", books);
+    prompt.get(['findBooks'], async function (err, res) {
+      console.log('You are looking for ' + res.findBooks);
+
+      const key = "AIzaSyDmYQmWIoPydQv0NzmBQTRS5G_w0wdNAis";
+      let fields = 'items(id, volumeInfo(title,authors,publisher))'
+  
+      const response = await axios.get(
+        "https://www.googleapis.com/books/v1/volumes?",
+        {
+          params: {
+            key: key,
+            q: "re",
+            maxResults: 5,
+            fields: fields
+            // orderBy: Relevance
+          },
+        }
+      );
+      const books = response.data.items
+
+      books.map((book, idx) => {
+        console.log(idx + 1, book.volumeInfo.title);
+        console.log(book.volumeInfo.authors);
+        console.log(book.volumeInfo.publisher);
+       
+      })
+
+      // console.log(books)
+
+      
+      // return books;
+    })
   } catch (err) {
-  console.log(err);
-  }
+    console.log(err);
+    }
+    
+  // console.log("resp:", books);
+  
   
 }
