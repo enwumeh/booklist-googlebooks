@@ -62,9 +62,11 @@ const getBooks = async () => {
         let bookNumber = parseInt(res.bookNumber);
 
         // console.log("book!!!",books)
-        let UserSelected = books[bookNumber];
+        let UserSelected = books[bookNumber - 1];
         booklist.push(UserSelected);
-        console.log("The book you've saved is:", UserSelected.volumeInfo.title);
+        console.log("The book you've saved is:");
+        console.log(UserSelected.volumeInfo.title);
+
         main();
         if (bookNumber < 1 || bookNumber > 5) {
           console.log("number must be between 1 and 5");
@@ -83,8 +85,10 @@ const viewBookList = () => {
     console.log("Looks like there are no books in your reading list");
     getBooks();
   } else {
-    console.log("Here are the entries in your list:")
-    // console.log("booklist",booklist);
+    console.log("Here are the entries in your list:");
+    
+
+    console.log("    ");
 
     booklist.map((entry, idx) => {
       console.log(idx + 1, "Title: " + entry.volumeInfo.title);
