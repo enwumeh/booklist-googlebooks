@@ -34,7 +34,7 @@ const getBooks = async () => {
         {
           params: {
             key: key,
-            q: "re",
+            q: res.findBooks,
             maxResults: 5,
             fields: fields
             // orderBy: Relevance
@@ -55,10 +55,7 @@ const getBooks = async () => {
       prompt.get(['bookNumber'], async function () {
 
         let bookNumber = res.bookNumber;
-
-
-
-
+        console.log("select the book you wanto save to the reading list")
       })
     })
   } catch (err) {
