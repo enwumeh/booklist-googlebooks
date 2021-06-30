@@ -60,16 +60,22 @@ const getBooks = async () => {
       prompt.get(["bookNumber"], async function (err, res) {
         let bookNumber = parseInt(res.bookNumber);
 
-        let UserSelected = books[bookNumber - 1];
+        if (bookNumber < 1 || bookNumber > 5) {
+          console.log("number must be between 1 and 5");
+          console.log("                ");
+          console.log("                ");
+          getBooks();
+        }
+
+        else {
+          let UserSelected = books[bookNumber - 1];
         booklist.push(UserSelected);
         console.log("The book you've saved is:");
         console.log(UserSelected.volumeInfo.title);
+        }
+        
 
         main();
-        if (bookNumber < 1 || bookNumber > 5) {
-          console.log("number must be between 1 and 5");
-          getBooks();
-        }
       });
     });
   } catch (err) {
