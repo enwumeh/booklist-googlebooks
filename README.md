@@ -3,7 +3,7 @@
 a CLI application using the Google Books API
 search for books  and save your book list!
 
-## Here is a desscription of the program:
+## Here is a description of the program:
 
 1. Type in a query and display a set of 5 books which match the query, including the author, title and publishing company
 2. Select one entry from the 5 books and save it to a reading list
@@ -21,7 +21,7 @@ cd src
 
 ```
 
-## 1. install dependcies locally
+## 1. install dependencies locally
 ```
 npm i or npm install
 
