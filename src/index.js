@@ -40,7 +40,6 @@ const getBooks = async () => {
             q: res.findBooks,
             maxResults: 5,
             fields: fields,
-            // orderBy: Relevance
           },
         }
       );
@@ -61,7 +60,6 @@ const getBooks = async () => {
       prompt.get(["bookNumber"], async function (err, res) {
         let bookNumber = parseInt(res.bookNumber);
 
-        // console.log("book!!!",books)
         let UserSelected = books[bookNumber - 1];
         booklist.push(UserSelected);
         console.log("The book you've saved is:");
@@ -77,7 +75,6 @@ const getBooks = async () => {
   } catch (err) {
     console.log(err);
   }
-  // console.log("resp:", books);
 };
 
 const viewBookList = () => {
@@ -92,7 +89,6 @@ const viewBookList = () => {
 
     booklist.map((entry, idx) => {
       console.log(idx + 1, "Title: " + entry.volumeInfo.title);
-// main();
     });
   }
 };
