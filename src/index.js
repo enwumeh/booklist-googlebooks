@@ -89,13 +89,15 @@ const viewBookList = () => {
     getBooks();
   } else {
     console.log("Here are the entries in your list:");
-    
-
     console.log("    ");
 
     booklist.map((entry, idx) => {
       console.log(idx + 1, "Title: " + entry.volumeInfo.title);
+      console.log("  ");
+      console.log("  ");
     });
+    main();
+
   }
 };
 
