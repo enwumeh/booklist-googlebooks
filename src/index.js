@@ -27,56 +27,65 @@ const getBooks = async () => {
   try {
 
     prompt.get(["findBooks"], async function (err, res) {
-      console.log("You are looking for " + res.findBooks);
-
-      const key = "AIzaSyDmYQmWIoPydQv0NzmBQTRS5G_w0wdNAis";
-      let fields = "items(id, volumeInfo(title,authors,publisher))";
-
-      const response = await axios.get(
-        "https://www.googleapis.com/books/v1/volumes?",
-        {
-          params: {
-            key: key,
-            q: res.findBooks,
-            maxResults: 5,
-            fields: fields,
-          },
-        }
-      );
-      const books = response.data.items;
-
-      books.map((book, idx) => {
-        console.log(idx + 1);
-        console.log("Title:", book.volumeInfo.title);
-        console.log("Author: " + book.volumeInfo.authors);
-        console.log("Published by: " + book.volumeInfo.publisher);
+      if (!res.findBooks) {
+        console.log("sorry, this is not valid. You must type in a valid character")
         console.log("                ");
-        console.log("                ");
-      });
-
-      console.log(
-        "select the book you want to save to your reading list (1-5)"
-      );
-      prompt.get(["bookNumber"], async function (err, res) {
-        let bookNumber = parseInt(res.bookNumber);
-
-        if (bookNumber < 1 || bookNumber > 5) {
-          console.log("number must be between 1 and 5");
-          console.log("                ");
-          console.log("                ");
-          getBooks();
-        }
-
-        else {
-          let UserSelected = books[bookNumber - 1];
-        booklist.push(UserSelected);
-        console.log("The book you've saved is:");
-        console.log(UserSelected.volumeInfo.title);
-        }
-        
-
         main();
-      });
+      }
+
+      else {
+        console.log("You are looking for " + res.findBooks);
+        const key = "AIzaSyDmYQmWIoPydQv0NzmBQTRS5G_w0wdNAis";
+        let fields = "items(id, volumeInfo(title,authors,publisher))";
+  
+        const response = await axios.get(
+          "https://www.googleapis.com/books/v1/volumes?",
+          {
+            params: {
+              key: key,
+              q: res.findBooks,
+              maxResults: 5,
+              fields: fields,
+            },
+          }
+        );
+        const books = response.data.items;
+  
+        books.map((book, idx) => {
+          console.log(idx + 1);
+          console.log("Title:", book.volumeInfo.title);
+          console.log("Author: " + book.volumeInfo.authors);
+          console.log("Published by: " + book.volumeInfo.publisher);
+          console.log("                ");
+        });
+  
+        console.log(
+          "select the book you want to save to your reading list (1-5)"
+        );
+        prompt.get(["bookNumber"], async function (err, res) {
+          let bookNumber = parseInt(res.bookNumber);
+  
+          if (bookNumber < 1 || bookNumber > 5) {
+            console.log("number must be between 1 and 5");
+            console.log("                ");
+            console.log("                ");
+            getBooks();
+          }
+  
+          else {
+            let UserSelected = books[bookNumber - 1];
+          booklist.push(UserSelected);
+          console.log("The book you've saved is:");
+          console.log(UserSelected.volumeInfo.title);
+          }
+          
+  
+          main();
+        });
+      }
+      // console.log("You are looking for " + res.findBooks);
+
+      
     });
   } catch (err) {
     console.log(err);
