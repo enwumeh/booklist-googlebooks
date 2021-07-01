@@ -20,9 +20,33 @@ const main = () => {
     }
   });
 };
+
 let booklist = [];
 
 
+const saveBook = (books) => {
+          console.log("select the book you want to save to your reading list (1-5)");
+          prompt.get(["bookNumber"], async function (err, res) {
+            let bookNumber = parseInt(res.bookNumber);
+    
+            if (bookNumber < 1 || bookNumber > 5) {
+              console.log("number must be between 1 and 5");
+              console.log("                ");
+              console.log("                ");
+              // getBooks();
+            }
+    
+            else {
+              let UserSelected = books[bookNumber - 1];
+            booklist.push(UserSelected);
+            console.log("The book you've saved is:");
+            console.log(UserSelected.volumeInfo.title);
+            }
+            main();
+          });
+        }
+//is the api response as it should be?
+//does the booklist have the correct books saved?
 const getBooks = async () => {
   try {
 
@@ -50,6 +74,8 @@ const getBooks = async () => {
           }
         );
         const books = response.data.items;
+        // console.log("BOOKS:",books);
+
   
         books.map((book, idx) => {
           console.log(idx + 1);
@@ -58,40 +84,19 @@ const getBooks = async () => {
           console.log("Published by: " + book.volumeInfo.publisher);
           console.log("                ");
         });
-  
-        console.log(
-          "select the book you want to save to your reading list (1-5)"
-        );
-        prompt.get(["bookNumber"], async function (err, res) {
-          let bookNumber = parseInt(res.bookNumber);
-  
-          if (bookNumber < 1 || bookNumber > 5) {
-            console.log("number must be between 1 and 5");
-            console.log("                ");
-            console.log("                ");
-            getBooks();
-          }
-  
-          else {
-            let UserSelected = books[bookNumber - 1];
-          booklist.push(UserSelected);
-          console.log("The book you've saved is:");
-          console.log(UserSelected.volumeInfo.title);
-          }
-          
-  
-          main();
-        });
-      }
-      // console.log("You are looking for " + res.findBooks);
+        saveBook(books)
 
+  
+        
+       
+      }
       
     });
   } catch (err) {
     console.log(err);
   }
 };
-
+// does it actually display the list?
 const viewBookList = () => {
   if (booklist.length <= 0) {
     console.log("Looks like there are no books in your reading list");
@@ -111,3 +116,6 @@ const viewBookList = () => {
 };
 
 main();
+
+
+// module.exports = main, viewBookList, getBooks
