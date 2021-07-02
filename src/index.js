@@ -31,13 +31,21 @@ let booklist = [];
 const saveBook = (books) => {
 
           console.log("select the book you want to save to your reading list (1-5)");
-          prompt.get(["bookNumber"], async function (err, res) {
-            let bookNumber = parseInt(res.bookNumber);
+  prompt.get(["bookNumber"], async function (err, res) {
+            
+
+    let bookNumber = parseInt(res.bookNumber);
     
+    if (!bookNumber) {
+      console.log('\n'+"sorry, this is not valid. You must type in a valid keyboard character")
+
+    }
             if (bookNumber < 1 || bookNumber > 5) {
               
               console.log('\n'+'\n'+"number must be between 1 and 5");
             }
+
+            
     
             else {
               let UserSelected = books[bookNumber - 1];
@@ -130,4 +138,4 @@ const viewBookList = () => {
 main();
 
 
-module.exports = main, viewBookList, getBooks, bookie
+module.exports = main, viewBookList, getBooks, searchResults
