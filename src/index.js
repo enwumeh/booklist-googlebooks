@@ -29,7 +29,7 @@ let booklist = [];
 
 //Saves user book choice into booklist array 
 const saveBook = (books) => {
-
+  
           console.log("select the book you want to save to your reading list (1-5)");
   prompt.get(["bookNumber"], async function (err, res) {
             
@@ -37,15 +37,12 @@ const saveBook = (books) => {
     let bookNumber = parseInt(res.bookNumber);
     
     if (!bookNumber) {
-      console.log('\n'+"sorry, this is not valid. You must type in a valid keyboard character")
-
+      console.log('\n'+"sorry, this is not valid. You must type in a valid keyboard character"+'\n'+'\n')
+main()
     }
-            if (bookNumber < 1 || bookNumber > 5) {
-              
+            else if (bookNumber < 1 || bookNumber > 5 || !isNaN(bookNumber) ) {
               console.log('\n'+'\n'+"number must be between 1 and 5");
             }
-
-            
     
             else {
               let UserSelected = books[bookNumber - 1];
