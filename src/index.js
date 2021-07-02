@@ -50,6 +50,29 @@ const saveBook = (books) => {
         }
 //is the api response as it should be?
 //does the booklist have the correct books saved?
+
+const bookie = async (userBookInput) => {
+  console.log("You are looking for " + userBookInput);
+  const key = "AIzaSyDmYQmWIoPydQv0NzmBQTRS5G_w0wdNAis";
+  let fields = "items(id, volumeInfo(title,authors,publisher))";
+
+  const response = await axios.get(
+    "https://www.googleapis.com/books/v1/volumes?",
+    {
+      params: {
+        key: key,
+        q: userBookInput,
+        maxResults: 5,
+        fields: fields,
+      },
+    }
+  );
+
+  const books = response.data.items;
+  // console.log(books)
+  return books;
+}
+
 const getBooks = async () => {
   try {
 
@@ -61,32 +84,18 @@ const getBooks = async () => {
       }
 
       else {
-        console.log("You are looking for " + res.findBooks);
-        const key = "AIzaSyDmYQmWIoPydQv0NzmBQTRS5G_w0wdNAis";
-        let fields = "items(id, volumeInfo(title,authors,publisher))";
-  
-        const response = await axios.get(
-          "https://www.googleapis.com/books/v1/volumes?",
-          {
-            params: {
-              key: key,
-              q: res.findBooks,
-              maxResults: 5,
-              fields: fields,
-            },
-          }
-        );
-        const books = response.data.items;
+
+        const book1 = await bookie(res.findBooks)
 
   
-        books.map((book, idx) => {
+        book1.map((book, idx) => {
           console.log(idx + 1);
           console.log("Title:", book.volumeInfo.title);
           console.log("Author: " + book.volumeInfo.authors);
           console.log("Published by: " + book.volumeInfo.publisher);
           console.log(" ");
         });
-        saveBook(books)
+        saveBook(book1)
       }
       
     });
@@ -94,7 +103,6 @@ const getBooks = async () => {
     console.log(err);
   }
 
-  return books;
 };
 // does it actually display the list?
 const viewBookList = () => {
