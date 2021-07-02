@@ -1,23 +1,23 @@
 const prompt = require("prompt");
 const axios = require("axios");
 
+
 const initPrompt = () => {
   return console.log(
     '\n'+'\n'+'How can I help? Options are "books" and  "see list"'
   );
 }
+
+//main():  ask user what they'd like to do perform actions based on this
   const main = () => {
     prompt.start();
     initPrompt();
       
   prompt.get(["option"], function (err, res) {
     if (res.option == "books") {
-      // let gg = getBooks.
       getBooks();
-      //handle condition
     } else if (res.option == "see list") {
       viewBookList();
-      //handle condition
     } else {
       console.log("looks like this isn't one of the possible options!");
       main()
@@ -26,8 +26,10 @@ const initPrompt = () => {
 };
 
 let booklist = [];
-//should save correct book into list
+
+//Saves user book choice into booklist array 
 const saveBook = (books) => {
+
           console.log("select the book you want to save to your reading list (1-5)");
           prompt.get(["bookNumber"], async function (err, res) {
             let bookNumber = parseInt(res.bookNumber);
@@ -47,10 +49,10 @@ const saveBook = (books) => {
           });
     return booklist;
         }
-//is the api response as it should be?
-//does the booklist have the correct books saved?
 
-const bookie = async (userBookInput) => {
+//searchResults() :fetch user data from API
+const searchResults = async (userBookInput) => {
+
   console.log("You are looking for " + userBookInput);
   const key = "AIzaSyDmYQmWIoPydQv0NzmBQTRS5G_w0wdNAis";
   let fields = "items(id, volumeInfo(title,authors,publisher))";
@@ -68,13 +70,14 @@ const bookie = async (userBookInput) => {
   );
 
   const books = response.data.items;
-  // console.log(books)
   return books;
 }
 
+
+//getBooks() : prompt user for search choice, map through data
 const getBooks = async () => {
+
   try {
-    
     console.log('\n'+'What would you like to search for?')
     
     prompt.get(["findBooks"], async function (err, res) {
@@ -86,18 +89,17 @@ const getBooks = async () => {
 
       else {
 
-        const book1 = await bookie(res.findBooks)
-        console.log(book1)
+        const booksArr = await searchResults(res.findBooks)
+        console.log(booksArr)
 
   
-        book1.map((book, idx) => {
+        booksArr.map((book, idx) => {
           console.log(idx + 1);
           console.log("Title:", book.volumeInfo.title);
           console.log("Author: " + book.volumeInfo.authors);
-          console.log("Published by: " + book.volumeInfo.publisher);
-          console.log(" ");
+          console.log("Published by: " + book.volumeInfo.publisher +'\n');
         });
-        saveBook(book1)
+        saveBook(booksArr)
       }
       
     });
@@ -106,24 +108,23 @@ const getBooks = async () => {
   }
 
 };
-// does it actually display the list?
+//viewBookList() : shows books saved by user
 const viewBookList = () => {
   if (booklist.length <= 0) {
     console.log("Looks like there are no books in your reading list");
     getBooks();
   } else {
-    console.log("Here are the entries in your list:");
-    console.log("    ");
+    console.log('\n'+"Here are the entries in your list:");
+    
 
-    let listed = booklist.map((entry, idx) => {
-      console.log(idx + 1, "Title: " + entry.volumeInfo.title);
-      console.log("  ");
-      console.log("  ");
+    let listing = booklist.map((entry, idx) => {
+      console.log('\n'+idx + 1, "Title: " + entry.volumeInfo.title);
+
     });
     main();
 
   }
-  return listed;
+  return listing;
 };
 
 main();
