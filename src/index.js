@@ -1,11 +1,13 @@
 const prompt = require("prompt");
 const axios = require("axios");
 
-const main = () => {
+
+  const main = () => {
   prompt.start();
   console.log(
     '! What would you like to search for? Options are "books" and  "see list"'
   );
+
 
   prompt.get(["option"], function (err, res) {
     if (res.option == "books") {
@@ -22,8 +24,7 @@ const main = () => {
 };
 
 let booklist = [];
-
-
+//should save correct book into list
 const saveBook = (books) => {
           console.log("select the book you want to save to your reading list (1-5)");
           prompt.get(["bookNumber"], async function (err, res) {
@@ -33,7 +34,6 @@ const saveBook = (books) => {
               console.log("number must be between 1 and 5");
               console.log("                ");
               console.log("                ");
-              // getBooks();
             }
     
             else {
@@ -52,7 +52,7 @@ const getBooks = async () => {
 
     prompt.get(["findBooks"], async function (err, res) {
       if (!res.findBooks) {
-        console.log("sorry, this is not valid. You must type in a valid character")
+        console.log("sorry, this is not valid. You must type in a valid keyboard character")
         console.log("                ");
         main();
       }
@@ -85,10 +85,6 @@ const getBooks = async () => {
           console.log("                ");
         });
         saveBook(books)
-
-  
-        
-       
       }
       
     });
