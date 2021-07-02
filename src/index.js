@@ -2,7 +2,7 @@ const prompt = require("prompt");
 const axios = require("axios");
 
 
-const initPrompt = () => {
+ const initPrompt = () => {
   return console.log(
     '\n'+'\n'+'How can I help? Options are "books" and  "see list"'
   );
@@ -37,15 +37,15 @@ const saveBook = (books) => {
     let bookNumber = parseInt(res.bookNumber);
     
     if (!bookNumber) {
-      console.log('\n'+"sorry, this is not valid. You must type in a valid keyboard character"+'\n'+'\n')
-main()
+      console.log('\n' + "sorry, this is not valid. You must type in a valid keyboard character" + '\n' + '\n')
+      main()
     }
-            else if (bookNumber < 1 || bookNumber > 5 || !isNaN(bookNumber) ) {
-              console.log('\n'+'\n'+"number must be between 1 and 5");
-            }
+          else if (bookNumber < 1 || bookNumber > 5 || !isNaN(bookNumber) ) {
+            console.log('\n'+'\n'+"number must be between 1 and 5");
+          }
     
-            else {
-              let UserSelected = books[bookNumber - 1];
+          else {
+            let UserSelected = books[bookNumber - 1];
             booklist.push(UserSelected);
             console.log("The book you've saved is:");
             console.log(UserSelected.volumeInfo.title);
