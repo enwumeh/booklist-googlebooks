@@ -3,7 +3,7 @@ const axios = require("axios");
 
 const initPrompt = () => {
   return console.log(
-    '! What would you like to search for? Options are "books" and  "see list"'
+    '\n'+'\n'+'How can I help? Options are "books" and  "see list"'
   );
 }
   const main = () => {
@@ -33,9 +33,8 @@ const saveBook = (books) => {
             let bookNumber = parseInt(res.bookNumber);
     
             if (bookNumber < 1 || bookNumber > 5) {
-              console.log("number must be between 1 and 5");
-              console.log(" ");
-              console.log(" ");
+              
+              console.log('\n'+'\n'+"number must be between 1 and 5");
             }
     
             else {
@@ -75,17 +74,20 @@ const bookie = async (userBookInput) => {
 
 const getBooks = async () => {
   try {
-
+    
+    console.log('\n'+'What would you like to search for?')
+    
     prompt.get(["findBooks"], async function (err, res) {
       if (!res.findBooks) {
-        console.log("sorry, this is not valid. You must type in a valid keyboard character")
-        console.log("                ");
+        console.log('\n'+"sorry, this is not valid. You must type in a valid keyboard character")
+       
         main();
       }
 
       else {
 
         const book1 = await bookie(res.findBooks)
+        console.log(book1)
 
   
         book1.map((book, idx) => {
@@ -118,14 +120,17 @@ const viewBookList = () => {
       console.log("  ");
       console.log("  ");
     });
+
+    
     main();
 
 
   }
+  
   return booklist;
 };
 
 main();
 
 
-module.exports = main, viewBookList, getBooks
+module.exports = main, viewBookList, getBooks, bookie
