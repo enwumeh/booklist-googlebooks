@@ -1,16 +1,18 @@
 const prompt = require("prompt");
 const axios = require("axios");
 
-
-  const main = () => {
-  prompt.start();
-  console.log(
+const initPrompt = () => {
+  return console.log(
     '! What would you like to search for? Options are "books" and  "see list"'
   );
-
-
+}
+  const main = () => {
+    prompt.start();
+    initPrompt();
+      
   prompt.get(["option"], function (err, res) {
     if (res.option == "books") {
+      // let gg = getBooks.
       getBooks();
       //handle condition
     } else if (res.option == "see list") {
@@ -32,8 +34,8 @@ const saveBook = (books) => {
     
             if (bookNumber < 1 || bookNumber > 5) {
               console.log("number must be between 1 and 5");
-              console.log("                ");
-              console.log("                ");
+              console.log(" ");
+              console.log(" ");
             }
     
             else {
@@ -44,6 +46,7 @@ const saveBook = (books) => {
             }
             main();
           });
+    return booklist;
         }
 //is the api response as it should be?
 //does the booklist have the correct books saved?
@@ -74,7 +77,6 @@ const getBooks = async () => {
           }
         );
         const books = response.data.items;
-        // console.log("BOOKS:",books);
 
   
         books.map((book, idx) => {
@@ -82,7 +84,7 @@ const getBooks = async () => {
           console.log("Title:", book.volumeInfo.title);
           console.log("Author: " + book.volumeInfo.authors);
           console.log("Published by: " + book.volumeInfo.publisher);
-          console.log("                ");
+          console.log(" ");
         });
         saveBook(books)
       }
@@ -91,6 +93,8 @@ const getBooks = async () => {
   } catch (err) {
     console.log(err);
   }
+
+  return books;
 };
 // does it actually display the list?
 const viewBookList = () => {
@@ -108,10 +112,12 @@ const viewBookList = () => {
     });
     main();
 
+
   }
+  return booklist;
 };
 
 main();
 
 
-// module.exports = main, viewBookList, getBooks
+module.exports = main, viewBookList, getBooks
