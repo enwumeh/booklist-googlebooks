@@ -37,7 +37,7 @@ export default function lunch(order) {
     console.log("Unable to process: side must be ordered at least");
     side = null;
   } else {
-    side = `Chips`;
+    side = "Chips";
   }
 
   //sandwich
@@ -54,7 +54,7 @@ export default function lunch(order) {
   }
 
   let finalReturn;
-  if (soda <= 0 || chips <= 0 || sandwich <= 0) {
+  if (chips <= 0 || sandwich > 1) {
     finalReturn = null;
   }
   else {

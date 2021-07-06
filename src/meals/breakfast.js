@@ -14,23 +14,24 @@ export default function breakfast(order) {
   });
   //drink: coffee
   let drink;
-  if (coffee > 0) {
+  if (coffee > 1) {
+    drink = `Coffee(x${coffee})`;
+
+  } else if ((coffee <= 0)) {
     drink = "Water";
-  } else if ((coffee = 1)) {
-    drink = "Coffee";
   } else {
-    drink = `Coffee x ${coffee}`;
+    drink = "Coffee";
   }
 
   //side: toast
   let side;
   if (toast > 1) {
-    side = `Toast(x${toast}`;
+    side = `Toast(x${toast})`;
   } else if ((toast <= 0)) {
     side = null;
     console.log("Unable to process: side must be ordered at least once");
   } else {
-    side = "Chips";
+    side = "Toast";
   }
 
   //main: eggs
